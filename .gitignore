@@ -1,0 +1,6 @@
+
+# airflow logs
+logs/
+
+# config file 
+config/airflow.cfg
