@@ -2,12 +2,12 @@ import requests
 import json
 
 # config für autobahn_id
-from config import AUTOBAHNEN
+#from config import AUTOBAHNEN / replaced with list in thsi file because of import errors when running in container
 
 
 
 # Data Extraction
-
+AUTOBAHNEN = ["A1", "A2", "A3","A4","A5","A6","A7","A8","A9"]
 print(AUTOBAHNEN)
 
 def fetch_traffic_data(autobahn_id: str):
