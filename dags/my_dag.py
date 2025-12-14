@@ -2,23 +2,23 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
 
+from traffic_data.fetch_data import fetch_traffic_data
+
 # Task-Funktion
-def hello_airflow():
-    print("Hello, Airflow!")
+def fetch():
+    return fetch_traffic_data()
 
 # DAG-Definition
 with DAG(
-    dag_id="my_dag",
+    dag_id="traffic_api_pipeline",
     start_date=datetime(2025, 1, 1),
-    schedule="@daily",
+    schedule="@minutely",
     catchup=False,
     tags=["example"]
 ) as dag:
 
-    task1 = PythonOperator(
-        task_id="print_hello",
-        python_callable=hello_airflow
-    )
+    fetch_task = PythonOperator(task_id="fetch_data", python_callable=fetch)
+
 
     # Wenn du mehrere Tasks hättest, könntest du hier die Reihenfolge festlegen:
     # task1 >> task2
